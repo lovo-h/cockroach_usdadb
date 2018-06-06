@@ -3,3 +3,6 @@
 
 # System Files
 .DS_Store
+
+# Custom
+caddy_mnt/*.csv
