@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  cockroach-usdadb:
+    image: cockroachdb/cockroach
+    container_name: cockroach_usdadb
+    command: start --insecure
+    ports:
+      - 8080:8080
+    links:
+      - caddy-fileserver
+  caddy-fileserver:
+    image: caddy_upload
+    container_name: caddy_fileserver
+    ports:
+      - 2015:2015
+    volumes:
+      - ./caddy_mnt/:/srv/
+      - ./Caddyfile:/etc/Caddyfile
+      - ${HOME}/.caddy:/root/.caddy
+    environment:
+      - ACME_AGREE=true
